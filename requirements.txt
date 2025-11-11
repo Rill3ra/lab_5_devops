@@ -2,3 +2,4 @@ Flask
 pytest
 httpx
 fastapi
+uvicorn
