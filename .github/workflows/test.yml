@@ -1,0 +1,32 @@
+name: Test Python App
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12' # Рекомендуется в кавычках
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # Выберите один из вариантов ниже, в зависимости от вашей структуры проекта:
+          # Вариант 1: Если есть requirements.txt и нужно установить его + pytest
+          pip install -r requirements.txt
+          pip install pytest
+          # Вариант 2: Если requirements.txt не используется, и нужно только pytest + httpx
+          # pip install pytest httpx
+
+      - name: Run tests
+        run: python -m pytest tests/
